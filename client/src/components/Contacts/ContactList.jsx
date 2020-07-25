@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { connect } from "react-redux";
+import { FetchContactsAC } from '../../redux/action';
 
-function ContactList() {
+function ContactList(props) {
     const [contacts, setContacts] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
-        async function fetchData() {
-            const response = await fetch('/api/contacts', {
-                method: "GET",
-                headers: { "Content-Type": 'application/json' }
-            })
-            const result = await response.json();
-            if (result.message === 'Unauthorized') {
-                history.push('/login')
-            }
-        }
-        fetchData()
+        props.fetchContacts()
     }, [])
-
     return (
-        <h1>Contacts LIST</h1>
+        <h1>Contact List</h1>
     )
 }
 
-export default ContactList;
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchContacts: () => {
+            dispatch(FetchContactsAC())
+        }
+    };
+}
+
+function mapStateToProps(store) {
+    return {
+        contactList: store.contactList
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

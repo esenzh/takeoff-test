@@ -1,0 +1,5 @@
+const FETCH_CONTACTS = "FETCH_CONTACTS";
+
+export {
+    FETCH_CONTACTS
+}
