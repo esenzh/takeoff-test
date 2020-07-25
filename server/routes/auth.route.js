@@ -39,8 +39,40 @@ router.post(
   }
 );
 
-router.post("/login", (req, res) => {
-  res.json({ message: "Login is sucessfull" });
-});
+router.post(
+  "/login",
+  [
+    body("email", "Please, enter valid email").normalizeEmail().isEmail(),
+    body("password", "Enter password").exists(),
+  ],
+
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          erorrs: errors.array(),
+          message: "Invalid inputs during sign in",
+        });
+      }
+      const { email, password } = req.body;
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Invalid password, try again" });
+      }
+      req.session.user = user;
+      res.status(200).json({ message: "Access granted" });
+    } catch (e) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong in server, try again" });
+    }
+  }
+);
 
 module.exports = router;

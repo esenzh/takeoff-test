@@ -1,13 +1,28 @@
 const express = require("express");
 const config = require("config");
 const mongoose = require("mongoose");
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const FileStore = require("session-file-store")(session);
+
 
 const app = express();
 
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use(cookieParser());
+app.use(
+  session({
+    store: new FileStore(),
+    key: "user_sid",
+    secret: "very secret",
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
 app.use("/api/auth", require("./routes/auth.route"));
 
