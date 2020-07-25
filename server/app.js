@@ -6,12 +6,10 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const FileStore = require("session-file-store")(session);
 
-
 const app = express();
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 app.use(
