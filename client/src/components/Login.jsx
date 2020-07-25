@@ -4,10 +4,10 @@ import LoginButton from './Button';
 function Login() {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-    const handleOnChange = events => {
-        events.target.name === 'email'
-            ? setEmailInput(events.target.value)
-            : setPasswordInput(events.target.value)
+    const handleOnChange = event => {
+        event.target.name === 'email'
+            ? setEmailInput(event.target.value)
+            : setPasswordInput(event.target.value)
     }
     return (
         <form >
