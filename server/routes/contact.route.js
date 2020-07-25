@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const Contact = require("../models/Contact");
+const sessionChecker = require("../middleware/auth");
 
 const router = Router();
 
 router
-  .get("/contacts", async (req, res) => {
+  .get("/contacts", sessionChecker, async (req, res) => {
     try {
       const userID = req.session.user._id;
       const contacts = await Contact.find({ author: userID });
@@ -12,9 +13,8 @@ router
     } catch (e) {
       res.status(500).json({ message: "Something went wrong, try again" });
     }
-    res.json({ message: "ALL posts" });
   })
-  .post("/contacts", async (req, res) => {
+  .post("/contacts", sessionChecker, async (req, res) => {
     try {
       const { name, email, phone } = req.body;
       const { user } = req.session;
@@ -26,7 +26,7 @@ router
       res.status(500).json({ message: "Something went wrong, try again" });
     }
   })
-  .put("contacts", async (req, res) => {
+  .put("contacts", sessionChecker, async (req, res) => {
     try {
       const { id, name, email, phone } = req.body;
       await Contact.updateOne({ _id: id }, { $set: { name, email, phone } });
@@ -35,7 +35,7 @@ router
       res.status(500).json({ message: "Something went wrong, try again" });
     }
   })
-  .delete("contacts", async (req, res) => {
+  .delete("contacts", sessionChecker, async (req, res) => {
     try {
       const { id } = req.body;
       await Contact.deleteOne({ _id: id });
