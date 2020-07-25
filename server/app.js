@@ -1,10 +1,13 @@
 const express = require("express");
 const config = require("config");
 const mongoose = require("mongoose");
+var bodyParser = require('body-parser')
 
 const app = express();
 
-app.use(express.json({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use("/api/auth", require("./routes/auth.route"));
 
