@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import SignUpButton from './Button';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function SignUp() {
     const [name, setNameInput] = useState('');
     const [email, setEmailInput] = useState('');
     const [password, setPasswordInput] = useState('');
-    const [isRedirect, setRedirest] = useState(false);
+
+    const history = useHistory();
 
     const handleOnChange = event => {
         if (event.target.name === 'name') {
@@ -27,7 +28,7 @@ function SignUp() {
         })
         const result = await response.json();
         if (result.message === 'User created') {
-            setRedirest(true);
+            history.push('/')
         } else {
             alert(result.message);
         }
