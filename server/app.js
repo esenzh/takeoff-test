@@ -3,6 +3,10 @@ const config = require("config");
 
 const app = express();
 
+app.use(express.json({ extended: true }));
+
+app.use('/api/auth', require("./routes/auth.route"))
+
 const PORT = config.get("port" || 5000);
 
 function start() {
