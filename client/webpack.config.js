@@ -33,7 +33,7 @@ const babelOptions = (preset) => {
 module.exports = {
   context: path.resolve(__dirname, "src"),
   mode: "development",
-  entry: "./index.jsx",
+  entry: ["@babel/polyfill","./index.jsx"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -41,6 +41,11 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000'
+      }
+    },
     port: 4200,
     hot: isDev,
   },

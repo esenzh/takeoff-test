@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import SignUpButton from './Button';
+import { Redirect } from 'react-router-dom';
 
 function SignUp() {
-    const [nameInput, setNameInput] = useState('');
-    const [emailInput, setEmailInput] = useState('');
-    const [passwordInput, setPasswordInput] = useState('');
+    const [name, setNameInput] = useState('');
+    const [email, setEmailInput] = useState('');
+    const [password, setPasswordInput] = useState('');
+    const [isRedirect, setRedirest] = useState(false);
 
     const handleOnChange = event => {
         if (event.target.name === 'name') {
@@ -16,8 +18,23 @@ function SignUp() {
         }
     }
 
+    const handleSignUp = async event => {
+        event.preventDefault();
+        const response = await fetch('/api/auth/signup', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password })
+        })
+        const result = await response.json();
+        if (result.message === 'User created') {
+            setRedirest(true);
+        } else {
+            alert(result.message);
+        }
+    }
+
     return (
-        <form >
+        <form onSubmit={handleSignUp}>
             <label htmlFor="GET-name">Name</label>
             <input id='GET-name' type="text" name='name' onChange={handleOnChange} required />
 
