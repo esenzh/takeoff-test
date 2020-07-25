@@ -1,52 +1,46 @@
 import React, { useState } from 'react';
-import SignUpButton from './Button';
+import LoginButton from '../Button';
 import { useHistory } from 'react-router-dom';
 
-function SignUp() {
-    const [name, setNameInput] = useState('');
+function Login() {
     const [email, setEmailInput] = useState('');
     const [password, setPasswordInput] = useState('');
 
     const history = useHistory();
 
     const handleOnChange = event => {
-        if (event.target.name === 'name') {
-            setNameInput(event.target.value)
-        } else if (event.target.name === 'email') {
-            setEmailInput(event.target.value)
-        } else {
-            setPasswordInput(event.target.value)
-        }
+        event.target.name === 'email'
+            ? setEmailInput(event.target.value)
+            : setPasswordInput(event.target.value)
     }
 
-    const handleSignUp = async event => {
+    const handleLogin = async event => {
         event.preventDefault();
-        const response = await fetch('/api/auth/signup', {
+        const response = await fetch('/api/auth/login', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, password })
+            body: JSON.stringify({ email, password })
         })
         const result = await response.json();
-        if (result.message === 'User created') {
+        if (result.message === 'Access granted') {
             history.push('/')
         } else {
-            alert(result.message);
+            alert(result.message)
         }
     }
 
     return (
-        <form onSubmit={handleSignUp}>
-            <label htmlFor="GET-name">Name</label>
-            <input id='GET-name' type="text" name='name' onChange={handleOnChange} required />
-
+        <form onSubmit={handleLogin}>
             <label htmlFor="GET-email">Email</label>
             <input id='GET-email' type="email" name='email' onChange={handleOnChange} required />
 
             <label htmlFor="GET-password">Password</label>
             <input id='GET-password' type="password" name='password' onChange={handleOnChange} required />
-            <SignUpButton title={'Sign Up'} />
+            <LoginButton title={'Login'} />
         </form>
     )
 }
 
-export default SignUp;
+
+
+export default Login;

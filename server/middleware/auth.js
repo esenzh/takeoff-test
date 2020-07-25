@@ -1,5 +1,6 @@
 const sessionChecker = (req, res, next) => {
-  if (!req.sessionChecker.user) {
+  console.log(req.session.user)
+  if (!req.session.user) {
     res.status(401).json({ message: "Unauthorized" });
   } else {
     next();

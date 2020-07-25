@@ -1,8 +1,9 @@
 import React from 'react';
+import ContactList from './ContactList';
 
 function Contact() {
     return (
-        <h1>Contacts</h1>
+        <ContactList />
     )
 }
 
