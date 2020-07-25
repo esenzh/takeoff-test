@@ -30,7 +30,7 @@ router.post(
       const user = new User({ name, email, password: hashedPassword });
       req.session.user = user;
       await user.save();
-      res.status(200).json({ message: "User created" });
+      res.status(201).json({ message: "User created" });
     } catch (e) {
       res
         .status(500)

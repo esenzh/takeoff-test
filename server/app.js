@@ -25,6 +25,7 @@ app.use(
 );
 
 app.use("/api/auth", require("./routes/auth.route"));
+app.use("/api", require("./routes/contact.route"));
 
 const PORT = config.get("port" || 5000);
 
