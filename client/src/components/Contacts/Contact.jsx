@@ -6,6 +6,8 @@ function Contact() {
     return (
         <div>
             <AddContact />
+            <br/>
+            <br/>
             <ContactList />
         </div>
     )

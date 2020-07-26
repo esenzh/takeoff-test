@@ -9,8 +9,8 @@ function ContactEach(props) {
             <td>{props.contact.name}</td>
             <td>{props.contact.email}</td>
             <td>{props.contact.phone}</td>
-            <td><button>Edit</button></td>
-            <td><button onClick={() => props.deleteContact(props.contact._id)}>Delete</button></td>
+            <td><button className='contact-table__edit-button'>Edit</button></td>
+            <td><button className='contact-table__delete-button' onClick={() => props.deleteContact(props.contact._id)}>Delete</button></td>
         </tr>
     )
 }

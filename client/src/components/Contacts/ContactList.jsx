@@ -15,6 +15,8 @@ function ContactList(props) {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
