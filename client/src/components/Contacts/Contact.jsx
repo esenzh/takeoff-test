@@ -1,13 +1,34 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import ContactList from './ContactList';
 import AddContact from '../Contacts/AddContact';
 
 function Contact() {
+
+    const history = useHistory();
+
+    const logout = async () => {
+        const reponse = await fetch('/api/auth/logout', {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        })
+        const result = await reponse.json();
+        if (result.message === 'You logged out') {
+            history.push('/login')
+        } else {
+            alert(result.message)
+        }
+    }
     return (
-        <div>
+        <div className='container'>
+            <br />
+            <br />
+            <button className='logout-button' onClick={logout}>Logout</button>
+            <br />
+            <br />
             <AddContact />
-            <br/>
-            <br/>
+            <br />
+            <br />
             <ContactList />
         </div>
     )

@@ -7,6 +7,20 @@ html, body {
 body {
     background: linear-gradient(45deg, #4158d0, #c850c0);
 }
+
+.container{
+    padding: 0 200px 0 200px;
+}
+
+.logout-button{
+    background-color: red;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    float: right;
+}
   
 .add-form {
     display: flex;
