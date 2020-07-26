@@ -27,15 +27,10 @@ function AddContact(props) {
     }
 
     return (
-        <form onSubmit={handleAddContact}>
-            <label htmlFor="GET-name">Name</label>
-            <input id='GET-name' type="text" name='name' value={name} onChange={handleOnChange} required />
-
-            <label htmlFor="GET-email">Email</label>
-            <input id='GET-email' type="email" name='email' value={email} onChange={handleOnChange} required />
-
-            <label htmlFor="GET-phone">Phone</label>
-            <input id='GET-phone' type="text" name='phone' value={phone} onChange={handleOnChange} required />
+        <form onSubmit={handleAddContact} className='add-form'>
+            <input className="add-form__input" type="text" name='name' value={name} placeholder='Name' onChange={handleOnChange} required />
+            <input className="add-form__input" type="email" name='email' value={email} placeholder='Email' onChange={handleOnChange} required />
+            <input className="add-form__input" type="text" name='phone' value={phone} placeholder='Phone' onChange={handleOnChange} required />
             <AddButton title={'Add Contact'} />
         </form>
     )
