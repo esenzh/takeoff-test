@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
 import AddButton from '../Button';
+import Alert from '../Alert';
 import { AddContactAC } from '../../redux/action';
 
 function AddContact(props) {
@@ -27,12 +28,15 @@ function AddContact(props) {
     }
 
     return (
-        <form onSubmit={handleAddContact} className='add-form'>
-            <input className="add-form__input" type="text" name='name' value={name} placeholder='Name' onChange={handleOnChange} required />
-            <input className="add-form__input" type="email" name='email' value={email} placeholder='Email' onChange={handleOnChange} required />
-            <input className="add-form__input" type="text" name='phone' value={phone} placeholder='Phone' onChange={handleOnChange} required />
-            <AddButton title={'Add Contact'} />
-        </form>
+        <div>
+            {props.alert && <Alert text={props.alert} />}
+            <form onSubmit={handleAddContact} className='add-form'>
+                <input className="add-form__input" type="text" name='name' value={name} placeholder='Name' onChange={handleOnChange} required />
+                <input className="add-form__input" type="email" name='email' value={email} placeholder='Email' onChange={handleOnChange} required />
+                <input className="add-form__input" type="text" name='phone' value={phone} placeholder='Phone' onChange={handleOnChange} required />
+                <AddButton title={'Add Contact'} />
+            </form>
+        </div>
     )
 }
 
@@ -44,4 +48,10 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(AddContact);
+function mapStateToProps(store) {
+    return {
+        alert: store.errorAlert
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddContact);

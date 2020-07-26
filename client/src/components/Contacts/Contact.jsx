@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { connect } from "react-redux";
 import ContactList from './ContactList';
 import AddContact from '../Contacts/AddContact';
 
@@ -34,4 +35,10 @@ function Contact() {
     )
 }
 
-export default Contact;
+function mapStateToProps(store) {
+    return {
+        contactList: store.contactList
+    }
+}
+
+export default connect(mapStateToProps, null)(Contact);
