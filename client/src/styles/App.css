@@ -86,7 +86,7 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-.login-card {
+.login-card, .signup-card {
     background-color: #fff;
     height: 300px;
     width: 300px;
@@ -94,7 +94,7 @@ tbody tr:hover {
     border-radius: 10px;
 }
 
-.login-card .login-form {
+.login-form, .signup-form {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -102,30 +102,30 @@ tbody tr:hover {
     align-items: center;
 }
 
-.login-form div {
+.login-form div, .signup-form div {
     padding: 10px;
 }
 
-.login-form__email {
+.login-form__email, .signup-form__name, .signup-form__email {
     margin-right: 32px;
 }
 
-.login-form__password {
+.login-form__password, .signup-form__password {
     margin-right: 10px;
 }
 
-.login-form__input {
+.login-form__input, .signup-form__input {
     padding: 5px;
     border: 1px solid lightgray;
     border-radius: 5px;
 }
 
-.login-form span {
+.login-form span, .signup-form span {
     color: grey;
     font-size: small;
 }
 
-.login-form button {
+.login-form button, .signup-form button {
     background-color: #36304a;
     color: #fff;
     border: 0;

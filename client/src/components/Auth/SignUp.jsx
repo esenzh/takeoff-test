@@ -35,17 +35,29 @@ function SignUp() {
     }
 
     return (
-        <form onSubmit={handleSignUp}>
-            <label htmlFor="GET-name">Name</label>
-            <input id='GET-name' type="text" name='name' onChange={handleOnChange} required />
-
-            <label htmlFor="GET-email">Email</label>
-            <input id='GET-email' type="email" name='email' onChange={handleOnChange} required />
-
-            <label htmlFor="GET-password">Password</label>
-            <input id='GET-password' type="password" name='password' onChange={handleOnChange} required />
-            <SignUpButton title={'Sign Up'} />
-        </form>
+        <div className="signup-card">
+            <form onSubmit={handleSignUp} className="signup-form">
+                <div>
+                    <h2>Sign up</h2>
+                </div>
+                <div>
+                    <label htmlFor="GET-name" className="signup-form__name">Name</label>
+                    <input id='GET-name' type="text" name='name'className="signup-form__input" onChange={handleOnChange} required />
+                </div>
+                <div>
+                    <label htmlFor="GET-email" className="signup-form__email">Email</label>
+                    <input id='GET-email' type="email" name='email' className="signup-form__input" onChange={handleOnChange} required />
+                </div>
+                <div>
+                    <label htmlFor="GET-password" className="signup-form__password">Password</label>
+                    <input id='GET-password' type="password" name='password' className="signup-form__input" onChange={handleOnChange} required />
+                </div>
+                <SignUpButton title={'Sign Up'} />
+                <br/>
+                <span>You have an account? Then <a href={'/login'}>login</a></span>
+                <br/>
+            </form>
+        </div>
     )
 }
 
