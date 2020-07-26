@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { connect } from "react-redux";
 import AddButton from '../Button';
+import { AddContactAC } from '../../redux/action';
 
-function AddContact() {
+function AddContact(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -16,8 +18,13 @@ function AddContact() {
         }
     }
 
+    const handleAddContact = event => {
+        event.preventDefault();
+        props.addContact({ name, email, phone })
+    }
+
     return (
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleAddContact}>
             <label htmlFor="GET-name">Name</label>
             <input id='GET-name' type="text" name='name' onChange={handleOnChange} required />
 
@@ -31,4 +38,12 @@ function AddContact() {
     )
 }
 
-export default AddContact;
+function mapDispatchToProps(dispatch) {
+    return {
+        addContact: contact => {
+            dispatch(AddContactAC(contact))
+        }
+    };
+}
+
+export default connect(null, mapDispatchToProps)(AddContact);

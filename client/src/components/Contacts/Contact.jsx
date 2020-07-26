@@ -1,9 +1,13 @@
 import React from 'react';
 import ContactList from './ContactList';
+import AddContact from '../Contacts/AddContact';
 
 function Contact() {
     return (
-        <ContactList />
+        <div>
+            <AddContact />
+            <ContactList />
+        </div>
     )
 }
 
