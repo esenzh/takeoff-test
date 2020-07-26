@@ -4,7 +4,6 @@ const DELETE_CONTACT = "DELETE_CONTACT";
 const EDIT_CONTACT = "EDIT_CONTACT";
 const SHOW_ERROR = "SHOW_ERROR";
 const HIDE_ERROR = "HIDE_ERROR";
-const GIVE_ACCESS = "GIVE_ACCESS";
 
 export {
     FETCH_CONTACTS,
@@ -13,5 +12,4 @@ export {
     EDIT_CONTACT,
     SHOW_ERROR,
     HIDE_ERROR,
-    GIVE_ACCESS
 }

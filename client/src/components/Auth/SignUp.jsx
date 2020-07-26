@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from "react-redux";
+import { withCookies } from 'react-cookie';
 import SignUpButton from '../Button';
 
 function SignUp(props) {
@@ -29,7 +29,7 @@ function SignUp(props) {
         })
         const result = await response.json();
         if (result.message === 'User created') {
-            props.changeAccess();
+            props.cookies.set("isLoggedin", true)
             history.push('/')
         } else {
             alert(result.message);
@@ -44,7 +44,7 @@ function SignUp(props) {
                 </div>
                 <div>
                     <label htmlFor="GET-name" className="signup-form__name">Name</label>
-                    <input id='GET-name' type="text" name='name'className="signup-form__input" onChange={handleOnChange} required />
+                    <input id='GET-name' type="text" name='name' className="signup-form__input" onChange={handleOnChange} required />
                 </div>
                 <div>
                     <label htmlFor="GET-email" className="signup-form__email">Email</label>
@@ -55,20 +55,12 @@ function SignUp(props) {
                     <input id='GET-password' type="password" name='password' className="signup-form__input" onChange={handleOnChange} required />
                 </div>
                 <SignUpButton title={'Sign Up'} />
-                <br/>
+                <br />
                 <span>You have an account? Then <a href={'/login'}>login</a></span>
-                <br/>
+                <br />
             </form>
         </div>
     )
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        changeAccess: () => {
-            dispatch(ChangeAccessAC(true))
-        }
-    };
-}
-
-export default connect(null, mapDispatchToProps)(SignUp);
+export default withCookies(SignUp);

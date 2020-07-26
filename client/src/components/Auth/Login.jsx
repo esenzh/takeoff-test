@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from "react-redux";
+import { withCookies } from 'react-cookie';
 import LoginButton from '../Button';
-import { ChangeAccessAC } from '../../redux/action';
 
 function Login(props) {
     const [email, setEmailInput] = useState('');
@@ -25,7 +24,7 @@ function Login(props) {
         })
         const result = await response.json();
         if (result.message === 'Access granted') {
-            props.changeAccess();
+            props.cookies.set("isLoggedin", true)
             history.push('/')
         } else {
             alert(result.message)
@@ -54,13 +53,4 @@ function Login(props) {
     )
 }
 
-
-function mapDispatchToProps(dispatch) {
-    return {
-        changeAccess: () => {
-            dispatch(ChangeAccessAC(true))
-        }
-    };
-}
-
-export default connect(null, mapDispatchToProps)(Login);
+export default withCookies(Login);

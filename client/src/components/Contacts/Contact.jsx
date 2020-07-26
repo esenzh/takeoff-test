@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from "react-redux";
+import { withCookies } from 'react-cookie';
 import ContactList from './ContactList';
 import AddContact from '../Contacts/AddContact';
 
@@ -9,7 +9,7 @@ function Contact(props) {
     const history = useHistory();
 
     useEffect(() => {
-        if (!props.access) {
+        if (!props.cookies.get("isLoggedin")) {
             history.push('/login')
         }
     }, [])
@@ -41,10 +41,4 @@ function Contact(props) {
     )
 }
 
-function mapStateToProps(store) {
-    return {
-        access: store.giveAccess
-    }
-}
-
-export default connect(mapStateToProps, null)(Contact);
+export default withCookies(Contact);
