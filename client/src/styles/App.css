@@ -15,6 +15,8 @@ body {
 .add-form__input {
     padding: 5px;
     margin-right: 5px;
+    border: 0;
+    border-radius: 5px;
 }
 
 .add-form button {
