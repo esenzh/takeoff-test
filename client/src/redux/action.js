@@ -4,6 +4,7 @@ import {
   DELETE_CONTACT,
   SHOW_ERROR,
   HIDE_ERROR,
+  CLEAR_STORE,
 } from "./type";
 
 export const ShowErrorAC = (text) => {
@@ -22,6 +23,12 @@ export function HideErrorAC() {
   return {
     type: HIDE_ERROR,
   };
+}
+
+export const ClearStoreAC = () => {
+  return {
+    type: CLEAR_STORE
+  }
 }
 
 export const FetchContactsAC = () => {

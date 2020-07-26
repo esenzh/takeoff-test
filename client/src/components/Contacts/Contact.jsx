@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
+import { connect } from "react-redux";
 import ContactList from './ContactList';
 import AddContact from '../Contacts/AddContact';
+import { ClearStoreAC } from '../../redux/action';
 
 function Contact(props) {
 
@@ -21,6 +23,8 @@ function Contact(props) {
         })
         const result = await reponse.json();
         if (result.message === 'You logged out') {
+            props.cookies.remove("isLoggedin");
+            props.clearStore();
             history.push('/login')
         } else {
             alert(result.message)
@@ -41,4 +45,13 @@ function Contact(props) {
     )
 }
 
-export default withCookies(Contact);
+function mapDispatchToProps(dispatch) {
+    return {
+        clearStore: () => {
+            dispatch(ClearStoreAC())
+        }
+    };
+}
+
+
+export default withCookies(connect(null, mapDispatchToProps)(Contact));

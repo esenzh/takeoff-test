@@ -4,11 +4,12 @@ import {
   DELETE_CONTACT,
   SHOW_ERROR,
   HIDE_ERROR,
+  CLEAR_STORE,
 } from "./type";
 
 const initialState = {
   contactList: [],
-  errorAlert: null
+  errorAlert: null,
 };
 
 export default function (oldState = initialState, action) {
@@ -39,6 +40,11 @@ export default function (oldState = initialState, action) {
     case HIDE_ERROR:
       return {
         ...oldState,
+        errorAlert: null,
+      };
+    case CLEAR_STORE:
+      return {
+        contactList: [],
         errorAlert: null,
       };
     default:
