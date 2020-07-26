@@ -21,18 +21,21 @@ function AddContact(props) {
     const handleAddContact = event => {
         event.preventDefault();
         props.addContact({ name, email, phone })
+        setName('');
+        setEmail('');
+        setPhone('');
     }
 
     return (
         <form onSubmit={handleAddContact}>
             <label htmlFor="GET-name">Name</label>
-            <input id='GET-name' type="text" name='name' onChange={handleOnChange} required />
+            <input id='GET-name' type="text" name='name' value={name} onChange={handleOnChange} required />
 
             <label htmlFor="GET-email">Email</label>
-            <input id='GET-email' type="email" name='email' onChange={handleOnChange} required />
+            <input id='GET-email' type="email" name='email' value={email} onChange={handleOnChange} required />
 
             <label htmlFor="GET-phone">Phone</label>
-            <input id='GET-phone' type="text" name='phone' onChange={handleOnChange} required />
+            <input id='GET-phone' type="text" name='phone' value={phone} onChange={handleOnChange} required />
             <AddButton title={'Add Contact'} />
         </form>
     )
