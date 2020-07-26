@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import SignUpButton from '../Button';
 import { useHistory } from 'react-router-dom';
+import { connect } from "react-redux";
+import SignUpButton from '../Button';
 
-function SignUp() {
+function SignUp(props) {
     const [name, setNameInput] = useState('');
     const [email, setEmailInput] = useState('');
     const [password, setPasswordInput] = useState('');
@@ -28,6 +29,7 @@ function SignUp() {
         })
         const result = await response.json();
         if (result.message === 'User created') {
+            props.changeAccess();
             history.push('/')
         } else {
             alert(result.message);
@@ -61,4 +63,12 @@ function SignUp() {
     )
 }
 
-export default SignUp;
+function mapDispatchToProps(dispatch) {
+    return {
+        changeAccess: () => {
+            dispatch(ChangeAccessAC(true))
+        }
+    };
+}
+
+export default connect(null, mapDispatchToProps)(SignUp);

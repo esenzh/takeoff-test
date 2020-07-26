@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import ContactList from './ContactList';
 import AddContact from '../Contacts/AddContact';
 
-function Contact() {
+function Contact(props) {
 
     const history = useHistory();
+
+    useEffect(() => {
+        if (!props.access) {
+            history.push('/login')
+        }
+    }, [])
 
     const logout = async () => {
         const reponse = await fetch('/api/auth/logout', {
@@ -37,7 +43,7 @@ function Contact() {
 
 function mapStateToProps(store) {
     return {
-        contactList: store.contactList
+        access: store.giveAccess
     }
 }
 

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import LoginButton from '../Button';
 import { useHistory } from 'react-router-dom';
+import { connect } from "react-redux";
+import LoginButton from '../Button';
+import { ChangeAccessAC } from '../../redux/action';
 
-function Login() {
+function Login(props) {
     const [email, setEmailInput] = useState('');
     const [password, setPasswordInput] = useState('');
 
@@ -23,6 +25,7 @@ function Login() {
         })
         const result = await response.json();
         if (result.message === 'Access granted') {
+            props.changeAccess();
             history.push('/')
         } else {
             alert(result.message)
@@ -44,7 +47,7 @@ function Login() {
                     <input id='GET-password' type="password" name='password' className="login-form__input" onChange={handleOnChange} required />
                 </div>
                 <LoginButton title={'Login'} />
-                <br/>
+                <br />
                 <span>You don't have an account? Then <a href={'/signup'}>sign up</a></span>
             </form>
         </div>
@@ -52,5 +55,12 @@ function Login() {
 }
 
 
+function mapDispatchToProps(dispatch) {
+    return {
+        changeAccess: () => {
+            dispatch(ChangeAccessAC(true))
+        }
+    };
+}
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);

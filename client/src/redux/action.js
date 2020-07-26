@@ -4,8 +4,8 @@ import {
   DELETE_CONTACT,
   SHOW_ERROR,
   HIDE_ERROR,
+  GIVE_ACCESS,
 } from "./type";
-
 
 export const ShowErrorAC = (text) => {
   return (dispatch) => {
@@ -19,6 +19,19 @@ export const ShowErrorAC = (text) => {
   };
 };
 
+export function HideErrorAC() {
+  return {
+    type: HIDE_ERROR,
+  };
+}
+
+export function ChangeAccessAC(access) {
+  return {
+    type: GIVE_ACCESS,
+    payload: access,
+  };
+}
+
 export const FetchContactsAC = () => {
   return async (dispatch) => {
     try {
@@ -28,14 +41,12 @@ export const FetchContactsAC = () => {
       });
       const result = await response.json();
       if (result.message === "Unauthorized") {
-        dispatch(
-          ShowErrorAC("You are not authenticated, please login to continue...")
-        );
+        dispatch(ChangeAccessAC(false));
       } else {
         dispatch({ type: FETCH_CONTACTS, payload: result.contacts });
       }
     } catch (e) {
-      dispatch(ShowErrorAC("Something went wrong, try again..."))
+      dispatch(ShowErrorAC("Something went wrong, try again..."));
     }
   };
 };
@@ -51,11 +62,12 @@ export const AddContactAC = (contact) => {
       });
       const result = await response.json();
       if (result.messgae === "Unauthorized") {
+        dispatch(ChangeAccessAC(false));
       } else {
         dispatch({ type: ADD_CONTACT, payload: result.contact });
       }
     } catch (e) {
-      dispatch(ShowErrorAC("Something went wrong, try again..."))
+      dispatch(ShowErrorAC("Something went wrong, try again..."));
     }
   };
 };
@@ -69,15 +81,13 @@ export const DeleteContactAC = (id) => {
         body: JSON.stringify({ id }),
       });
       const result = await response.json();
-      dispatch({ type: DELETE_CONTACT, payload: id });
+      if (result.message === "Unauthorized") {
+        dispatch(ChangeAccessAC(false));
+      } else {
+        dispatch({ type: DELETE_CONTACT, payload: id });
+      }
     } catch (e) {
-      dispatch(ShowErrorAC("Something went wrong, try again..."))
+      dispatch(ShowErrorAC("Something went wrong, try again..."));
     }
   };
 };
-
-export function HideErrorAC() {
-  return {
-    type: HIDE_ERROR,
-  };
-}
