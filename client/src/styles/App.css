@@ -100,9 +100,17 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-.login-card, .signup-card {
+.login-card {
     background-color: #fff;
     height: 300px;
+    width: 300px;
+    margin: 100px auto;
+    border-radius: 10px;
+}
+
+.signup-card {
+    background-color: #fff;
+    height: 350px;
     width: 300px;
     margin: 100px auto;
     border-radius: 10px;
