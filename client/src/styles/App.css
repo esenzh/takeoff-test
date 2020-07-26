@@ -85,3 +85,51 @@ tbody tr:hover {
     background-color: lightblue;
     cursor: pointer;
 }
+
+.login-card {
+    background-color: #fff;
+    height: 300px;
+    width: 300px;
+    margin: 100px auto;
+    border-radius: 10px;
+}
+
+.login-card .login-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form div {
+    padding: 10px;
+}
+
+.login-form__email {
+    margin-right: 32px;
+}
+
+.login-form__password {
+    margin-right: 10px;
+}
+
+.login-form__input {
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.login-form span {
+    color: grey;
+    font-size: small;
+}
+
+.login-form button {
+    background-color: #36304a;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+}

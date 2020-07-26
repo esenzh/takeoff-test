@@ -30,14 +30,24 @@ function Login() {
     }
 
     return (
-        <form onSubmit={handleLogin}>
-            <label htmlFor="GET-email">Email</label>
-            <input id='GET-email' type="email" name='email' onChange={handleOnChange} required />
-
-            <label htmlFor="GET-password">Password</label>
-            <input id='GET-password' type="password" name='password' onChange={handleOnChange} required />
-            <LoginButton title={'Login'} />
-        </form>
+        <div className='login-card'>
+            <form onSubmit={handleLogin} className="login-form">
+                <div>
+                    <h2>Login</h2>
+                </div>
+                <div>
+                    <label htmlFor="GET-email" className="login-form__email">Email</label>
+                    <input id='GET-email' type="email" name='email' className="login-form__input" onChange={handleOnChange} required />
+                </div>
+                <div>
+                    <label htmlFor="GET-password" className="login-form__password">Password</label>
+                    <input id='GET-password' type="password" name='password' className="login-form__input" onChange={handleOnChange} required />
+                </div>
+                <LoginButton title={'Login'} />
+                <br/>
+                <span>You don't have an account? Then <a href={'/signup'}>sign up</a></span>
+            </form>
+        </div>
     )
 }
 
