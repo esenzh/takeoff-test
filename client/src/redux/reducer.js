@@ -1,4 +1,4 @@
-import { FETCH_CONTACTS, ADD_CONTACT } from "./type";
+import { FETCH_CONTACTS, ADD_CONTACT, DELETE_CONTACT } from "./type";
 
 const initialState = {
   contactList: [],
@@ -13,6 +13,11 @@ export default function (oldState = initialState, action) {
     case ADD_CONTACT:
       return {
         contactList: [action.payload, ...oldState.contactList],
+      };
+    case DELETE_CONTACT:
+      const updatedContact = oldState.contactList.filter(contact => contact._id !== action.payload)
+      return {
+        contactList: updatedContact,
       };
 
     default:

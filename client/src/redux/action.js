@@ -1,4 +1,4 @@
-import { FETCH_CONTACTS, ADD_CONTACT } from "./type";
+import { FETCH_CONTACTS, ADD_CONTACT, DELETE_CONTACT } from "./type";
 
 export const FetchContactsAC = () => {
   return async (dispatch) => {
@@ -24,6 +24,20 @@ export const AddContactAC = (contact) => {
       });
       const result = await response.json();
       dispatch({type: ADD_CONTACT, payload: result.contact})
+    } catch (e) {}
+  };
+};
+
+export const DeleteContactAC = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch("/api/contacts", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      const result = await response.json();
+      dispatch({type: DELETE_CONTACT, payload: id})
     } catch (e) {}
   };
 };

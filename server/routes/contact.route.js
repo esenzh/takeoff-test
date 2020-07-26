@@ -26,7 +26,7 @@ router
       res.status(500).json({ message: "Something went wrong, try again" });
     }
   })
-  .put("contacts", sessionChecker, async (req, res) => {
+  .put("/contacts", sessionChecker, async (req, res) => {
     try {
       const { id, name, email, phone } = req.body;
       await Contact.updateOne({ _id: id }, { $set: { name, email, phone } });
@@ -35,7 +35,7 @@ router
       res.status(500).json({ message: "Something went wrong, try again" });
     }
   })
-  .delete("contacts", sessionChecker, async (req, res) => {
+  .delete("/contacts", sessionChecker, async (req, res) => {
     try {
       const { id } = req.body;
       await Contact.deleteOne({ _id: id });
