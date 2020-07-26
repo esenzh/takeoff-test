@@ -75,4 +75,16 @@ router.post(
   }
 );
 
+router.get("/logout", async (req, res) => {
+  try {
+    await req.session.destroy();
+    res.clearCookie("user_sid");
+    res.status(200).json({ message: "You logged out" });
+  } catch (e) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong in server, try again" });
+  }
+});
+
 module.exports = router;
