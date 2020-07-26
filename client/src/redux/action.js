@@ -23,7 +23,7 @@ export const AddContactAC = (contact) => {
         body: JSON.stringify({ name, email, phone }),
       });
       const result = await response.json();
-      dispatch({type: ADD_CONTACT, payload: contact})
+      dispatch({type: ADD_CONTACT, payload: result.contact})
     } catch (e) {}
   };
 };
