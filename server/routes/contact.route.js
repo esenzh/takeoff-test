@@ -18,7 +18,6 @@ router
     try {
       const { name, email, phone } = req.body;
       const { user } = req.session;
-
       const contact = new Contact({ name, email, phone, author: user._id });
       await contact.save();
       res.status(201).json({ message: "Contact is created", contact });

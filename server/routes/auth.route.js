@@ -11,7 +11,6 @@ router.post(
     body("email", "invalid type of email").isEmail(),
     body("password", "Minimum symbol of password is 6").isLength({ min: 6 }),
   ],
-
   async (req, res) => {
     try {
       const errors = validationResult(req);
@@ -45,7 +44,6 @@ router.post(
     body("email", "Please, enter valid email").normalizeEmail().isEmail(),
     body("password", "Enter password").exists(),
   ],
-
   async (req, res) => {
     try {
       const errors = validationResult(req);
