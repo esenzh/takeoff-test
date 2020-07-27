@@ -4,6 +4,7 @@ import { withCookies } from 'react-cookie';
 import { connect } from "react-redux";
 import ContactList from './ContactList';
 import AddContact from '../Contacts/AddContact';
+import SearchContact from '../Contacts/SearchContact';
 import { ClearStoreAC } from '../../redux/action';
 
 function Contact(props) {
@@ -37,6 +38,9 @@ function Contact(props) {
             <button className='logout-button' onClick={logout}>Logout</button>
             <br />
             <br />
+            <SearchContact />
+            <br/>
+            <br/>
             <AddContact />
             <br />
             <br />

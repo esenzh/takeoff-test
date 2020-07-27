@@ -11,6 +11,7 @@ import {
 
 const initialState = {
   contactList: [],
+  searchedContactList: [],
   errorAlert: null,
 };
 
@@ -18,21 +19,21 @@ export default function (oldState = initialState, action) {
   switch (action.type) {
     case FETCH_CONTACTS:
       return {
+        ...oldState,
         contactList: action.payload,
-        errorAlert: oldState.errorAlert,
       };
     case ADD_CONTACT:
       return {
+        ...oldState,
         contactList: [action.payload, ...oldState.contactList],
-        errorAlert: oldState.errorAlert,
       };
     case DELETE_CONTACT:
       const updatedContact = oldState.contactList.filter(
         (contact) => contact._id !== action.payload
       );
       return {
+        ...oldState,
         contactList: updatedContact,
-        errorAlert: oldState.errorAlert,
       };
     case UPDATE_CONTACT:
       const { _id, name, email, phone } = action.payload;
@@ -47,17 +48,16 @@ export default function (oldState = initialState, action) {
           : contact
       );
       return {
+        ...oldState,
         contactList: updatedContacts,
-        errorAlert: oldState.errorAlert,
       };
     case SEARCH_CONTACT:
-      const { value } = action.payload;
-      const foundContacts = oldState.contactList.filter((contact) =>
-        contact.name.includes(value)
+      const searchedContact = oldState.contactList.filter((contact) =>
+        contact.name.includes(action.payload)
       );
       return {
-        contactList: foundContacts,
-        errorAlert: oldState.errorAlert,
+        ...oldState,
+        searchedContactList: searchedContact,
       };
     case SHOW_ERROR:
       return {
