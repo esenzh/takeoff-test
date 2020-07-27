@@ -3,6 +3,7 @@ import {
   ADD_CONTACT,
   DELETE_CONTACT,
   UPDATE_CONTACT,
+  SEARCH_CONTACT,
   SHOW_ERROR,
   HIDE_ERROR,
   CLEAR_STORE,
@@ -20,7 +21,7 @@ export const ShowErrorAC = (text) => {
   };
 };
 
-export function HideErrorAC() {
+export const HideErrorAC = () => {
   return {
     type: HIDE_ERROR,
   };
@@ -31,6 +32,13 @@ export const ClearStoreAC = () => {
     type: CLEAR_STORE,
   };
 };
+
+export const SearchContactAC = value => {
+  return {
+    type: SEARCH_CONTACT,
+    payload: value
+  }
+}
 
 export const FetchContactsAC = () => {
   return async (dispatch) => {
