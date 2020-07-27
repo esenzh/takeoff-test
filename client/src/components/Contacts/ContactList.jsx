@@ -20,8 +20,8 @@ function ContactList(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.searchedContactList.length !== 0
-                    ? (props.searchedContactList.map(contact => <ContactEach contact={contact} key={contact._id} />))
+                {props.value
+                    ? (props.searchedContactList.length !== 0 && props.searchedContactList.map(contact => <ContactEach contact={contact} key={contact._id} />))
                     : (props.contactList.length !== 0 && props.contactList.map(contact => <ContactEach contact={contact} key={contact._id} />))}
             </tbody>
         </table>
@@ -39,7 +39,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(store) {
     return {
         contactList: store.contactList,
-        searchedContactList: store.searchedContactList
+        searchedContactList: store.searchedContactList,
+        value: store.value
     }
 }
 

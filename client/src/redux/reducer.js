@@ -12,6 +12,7 @@ import {
 const initialState = {
   contactList: [],
   searchedContactList: [],
+  value: '',
   errorAlert: null,
 };
 
@@ -31,10 +32,22 @@ export default function (oldState = initialState, action) {
       const updatedContact = oldState.contactList.filter(
         (contact) => contact._id !== action.payload
       );
-      return {
-        ...oldState,
-        contactList: updatedContact,
-      };
+      if (oldState.searchedContactList.length !== 0) {
+        const updatedContact2 = oldState.searchedContactList.filter(
+          (contact) => contact._id !== action.payload
+        );
+        return {
+          ...oldState,
+          contactList: updatedContact,
+          searchedContactList: updatedContact2,
+        };
+      } else {
+        return {
+          ...oldState,
+          contactList: updatedContact,
+        };
+      }
+
     case UPDATE_CONTACT:
       const { _id, name, email, phone } = action.payload;
       const updatedContacts = oldState.contactList.map((contact) =>
@@ -58,6 +71,7 @@ export default function (oldState = initialState, action) {
       return {
         ...oldState,
         searchedContactList: searchedContact,
+        value: action.payload
       };
     case SHOW_ERROR:
       return {
@@ -72,6 +86,8 @@ export default function (oldState = initialState, action) {
     case CLEAR_STORE:
       return {
         contactList: [],
+        searchedContactList: [],
+        value: '',
         errorAlert: null,
       };
     default:
