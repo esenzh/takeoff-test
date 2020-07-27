@@ -25,7 +25,7 @@ export const HideErrorAC = () => {
   return {
     type: HIDE_ERROR,
   };
-}
+};
 
 export const ClearStoreAC = () => {
   return {
@@ -33,12 +33,12 @@ export const ClearStoreAC = () => {
   };
 };
 
-export const SearchContactAC = value => {
+export const SearchContactAC = (value) => {
   return {
     type: SEARCH_CONTACT,
-    payload: value
-  }
-}
+    payload: value,
+  };
+};
 
 export const FetchContactsAC = () => {
   return async (dispatch) => {

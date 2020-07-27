@@ -33,7 +33,7 @@ function Contact(props) {
     }
     return (
         <div className='container'>
-            <br/>
+            <br />
             <div className="container__logout-search">
                 <div>
                     <SearchContact />
@@ -42,9 +42,9 @@ function Contact(props) {
                     <button className='logout-button' onClick={logout}>Logout</button>
                 </div>
             </div>
-            <br/>
+            <br />
             <AddContact />
-            <br/>
+            <br />
             <ContactList />
         </div>
     )
@@ -57,6 +57,5 @@ function mapDispatchToProps(dispatch) {
         }
     };
 }
-
 
 export default withCookies(connect(null, mapDispatchToProps)(Contact));
