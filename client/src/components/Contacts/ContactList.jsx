@@ -20,9 +20,9 @@ function ContactList(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.value
-                    ? (props.searchedContactList.length !== 0 && props.searchedContactList.map(contact => <ContactEach contact={contact} key={contact._id} />))
-                    : (props.contactList.length !== 0 && props.contactList.map(contact => <ContactEach contact={contact} key={contact._id} />))}
+                {props.value && props.value
+                    ? (props.searchedContactList && props.searchedContactList.map(contact => <ContactEach contact={contact} key={contact._id} />))
+                    : (props.contactList && props.contactList.map(contact => <ContactEach contact={contact} key={contact._id} />))}
             </tbody>
         </table>
     )
