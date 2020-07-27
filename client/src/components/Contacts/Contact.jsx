@@ -33,17 +33,18 @@ function Contact(props) {
     }
     return (
         <div className='container'>
-            <br />
-            <br />
-            <button className='logout-button' onClick={logout}>Logout</button>
-            <br />
-            <br />
-            <SearchContact />
             <br/>
+            <div className="container__logout-search">
+                <div>
+                    <SearchContact />
+                </div>
+                <div>
+                    <button className='logout-button' onClick={logout}>Logout</button>
+                </div>
+            </div>
             <br/>
             <AddContact />
-            <br />
-            <br />
+            <br/>
             <ContactList />
         </div>
     )

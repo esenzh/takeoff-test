@@ -12,7 +12,7 @@ import {
 const initialState = {
   contactList: [],
   searchedContactList: [],
-  value: '',
+  value: "",
   errorAlert: null,
 };
 
@@ -29,22 +29,22 @@ export default function (oldState = initialState, action) {
         contactList: [action.payload, ...oldState.contactList],
       };
     case DELETE_CONTACT:
-      const updatedContact = oldState.contactList.filter(
+      const updatedContactList = oldState.contactList.filter(
         (contact) => contact._id !== action.payload
       );
-      if (oldState.searchedContactList.length !== 0) {
-        const updatedContact2 = oldState.searchedContactList.filter(
+      if (oldState.value) {
+        const updatedSearchContactList = oldState.searchedContactList.filter(
           (contact) => contact._id !== action.payload
         );
         return {
           ...oldState,
-          contactList: updatedContact,
-          searchedContactList: updatedContact2,
+          contactList: updatedContactList,
+          searchedContactList: updatedSearchContactList,
         };
       } else {
         return {
           ...oldState,
-          contactList: updatedContact,
+          contactList: updatedContactList,
         };
       }
 
@@ -60,18 +60,37 @@ export default function (oldState = initialState, action) {
             }
           : contact
       );
-      return {
-        ...oldState,
-        contactList: updatedContacts,
-      };
+      if (oldState.value) {
+        const updatedSearchList = oldState.searchedContactList.map((contact) =>
+          contact._id === _id
+            ? {
+                ...contact,
+                name,
+                email,
+                phone,
+              }
+            : contact
+        );
+
+        return {
+          ...oldState,
+          contactList: updatedContacts,
+          searchedContactList: updatedSearchList,
+        };
+      } else {
+        return {
+          ...oldState,
+          contactList: updatedContacts,
+        };
+      }
     case SEARCH_CONTACT:
       const searchedContact = oldState.contactList.filter((contact) =>
-        contact.name.includes(action.payload)
+        contact.name.toLowerCase().includes(action.payload.toLowerCase())
       );
       return {
         ...oldState,
         searchedContactList: searchedContact,
-        value: action.payload
+        value: action.payload,
       };
     case SHOW_ERROR:
       return {
@@ -87,7 +106,7 @@ export default function (oldState = initialState, action) {
       return {
         contactList: [],
         searchedContactList: [],
-        value: '',
+        value: "",
         errorAlert: null,
       };
     default:

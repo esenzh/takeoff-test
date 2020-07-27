@@ -19,7 +19,11 @@ body {
     border-radius: 5px;
     cursor: pointer;
     padding: 10px;
-    float: right;
+}
+
+.container__logout-search{
+    display: flex;
+    justify-content: space-between;
 }
   
 .add-form {
