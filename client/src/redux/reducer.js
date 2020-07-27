@@ -2,6 +2,7 @@ import {
   FETCH_CONTACTS,
   ADD_CONTACT,
   DELETE_CONTACT,
+  UPDATE_CONTACT,
   SHOW_ERROR,
   HIDE_ERROR,
   CLEAR_STORE,
@@ -30,6 +31,21 @@ export default function (oldState = initialState, action) {
       );
       return {
         contactList: updatedContact,
+        errorAlert: oldState.errorAlert,
+      };
+    case UPDATE_CONTACT:
+      const updatedContacts = oldState.contactList.map((contact) =>
+        contact._id === action.payload._id
+          ? {
+              ...contact,
+              name: action.payload.name,
+              email: action.payload.email,
+              phone: action.payload.phone,
+            }
+          : contact
+      );
+      return {
+        contactList: updatedContacts,
         errorAlert: oldState.errorAlert,
       };
     case SHOW_ERROR:

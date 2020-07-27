@@ -2,6 +2,7 @@ import {
   FETCH_CONTACTS,
   ADD_CONTACT,
   DELETE_CONTACT,
+  UPDATE_CONTACT,
   SHOW_ERROR,
   HIDE_ERROR,
   CLEAR_STORE,
@@ -27,9 +28,9 @@ export function HideErrorAC() {
 
 export const ClearStoreAC = () => {
   return {
-    type: CLEAR_STORE
-  }
-}
+    type: CLEAR_STORE,
+  };
+};
 
 export const FetchContactsAC = () => {
   return async (dispatch) => {
@@ -74,6 +75,25 @@ export const DeleteContactAC = (id) => {
       const result = await response.json();
       if (result.message === "Contact deleted") {
         dispatch({ type: DELETE_CONTACT, payload: id });
+      }
+    } catch (e) {
+      dispatch(ShowErrorAC("Something went wrong, try again..."));
+    }
+  };
+};
+
+export const UpdateContactAC = (contact) => {
+  return async (dispatch) => {
+    try {
+      const { _id, name, email, phone } = contact;
+      const response = await fetch("/api/contacts", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ _id, name, email, phone }),
+      });
+      const result = await response.json();
+      if (result.message === "Contact is updated") {
+        dispatch({ type: UPDATE_CONTACT, payload: contact });
       }
     } catch (e) {
       dispatch(ShowErrorAC("Something went wrong, try again..."));

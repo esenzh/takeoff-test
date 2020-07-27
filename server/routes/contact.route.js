@@ -28,8 +28,8 @@ router
   })
   .put("/contacts", sessionChecker, async (req, res) => {
     try {
-      const { id, name, email, phone } = req.body;
-      await Contact.updateOne({ _id: id }, { $set: { name, email, phone } });
+      const { _id, name, email, phone } = req.body;
+      await Contact.updateOne({ _id }, { $set: { name, email, phone } });
       res.status(200).json({ message: "Contact is updated" });
     } catch (e) {
       res.status(500).json({ message: "Something went wrong, try again" });
